@@ -16,8 +16,8 @@ class RunAlgo(Resource):
     def post(self):
         args = parser.parse_args()
         inputs = generateInputs(args['exp_dataset_uri'])
-        res = run(inputs, args['algo'])
-        output = parseOutput(*res)
+        res = run(dataset_uri=args['exp_dataset_uri'], PTData=inputs)
+        output = parseOutput(dataset_uri=args['exp_dataset_uri'], outDir=res)
         return output, 201
 
 api.add_resource(RunAlgo, '/run')
